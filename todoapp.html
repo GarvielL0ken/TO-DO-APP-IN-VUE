@@ -8,37 +8,54 @@
 	<body>
 		<div id="todoapp">
 			<h1>To do App</h1>
+			<!-- Controls for the application -->
+			<!-- Switch between the two different display modes -->
 			<button v-if="state==='edit'" @click="changeState('view')">View</button>
 			<button v-if="state==='view'" @click="changeState('edit')">Edit</button>
 			<br>
-			<input type="text" v-model="newTask">
-			<button @click="addTask" :disabled="newTask.length===0">Add Task</button>
+			<!-- User inputs for add new Tasks -->
+			<input type="text" v-model="newTaskLabel">
+			<input type="text" v-model="newTaskCategory">
+			<input type="number" v-model="newTaskPriority">
+			<input type="date" v-model="newTaskDueDate">
+			<button @click="addTask" :disabled="newTaskLabel.length===0">Add Task</button>
 			<div>
+				<!-- Headers for each Column-->
 				<div class="header-container">
 					<div class="task-header label">Label</div>
 					<div class="task-header category">Category</div>
+					<div class="task-header due-date">Due Date</div>
 					<div class="task-header priority">Priority</div>
 				</div>
+
+				<!-- Each task has a pair of display modes: 'view' and 'edit' -->
 				<div v-for="task in tasks" class="task-container">
+					<!-- Label -->
 					<div class="task-column label" v-if="state==='view'">{{task.label}}</div>
 					<div class="task-column label" v-if="state==='edit'"><input type="text" v-model="task.label"></div>
-					<div class="task-column category">{{task.category}}</div>
-					<div class="task-column priority">
-						{{task.priority}}
-						<button @click="deleteTask(task)">Delete</button>
+
+					<!-- Category -->
+					<div class="task-column category" v-if="state==='view'">{{task.category}}</div>
+					<div class="task-column category" v-if="state==='edit'">
+						<input type="text" v-model="task.category">
 					</div>
+
+
+					<!-- Due Date-->
+					<div class="task-column due-date" v-if="state==='view'">{{task.dueDate}}</div>
+					<div class="task-column category" v-if="state==='edit'">
+						<input type="date" v-model="task.dueDate">
+					</div>
+
+					<!-- Priority -->
+					<div class="task-column priority" v-if="state==='view'">{{task.priority}}</div>
+					<div class="task-column priority" v-if="state==='edit'">
+						<input type="number" v-model="task.priority">
+						<button @click="deleteTask(task)" v-if="state==='edit'">Delete</button>
+					</div>
+					
 				</div>
 			</div>
-			<!--<div class="grid-container">
-				<div v-for="task in tasks" class="grid-item outside-left column1">{{task.label}}</div>
-				<div v-for="task in tasks" class="grid-item column2">
-					{{task.category}}
-				</div>
-				<div v-for="task in tasks" class="grid-item outside-right column3" v-bind:class="[task.strRow]">
-					{{task.priority}}
-				</div>
-				<div></div>
-			</div>-->
 		</div>
 		<script src="https://unpkg.com/vue"></script>
 		<script src="todoapp.js"></script>
