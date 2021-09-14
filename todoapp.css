@@ -26,18 +26,21 @@ body {
 	border-right: 0px;
 }
 
-.row1 {
-	grid-row: 1;
+.task-container {
+	height: 25px;
+	margin-top: 5px;
 }
 
-.row2 {
-	grid-row: 2;
+.task-column {
+	background-color: darkgrey;
+	border: 1px solid black;
+	float: left;
+	height: 23px;
+	width: 30%;
 }
 
-.row3 {
-	grid-row: 3;
-}
-
-.row4 {
-	grid-row: 4;
+.label {
+	float: left;
+	margin-left: 2%;
+	width: 35%;
 }

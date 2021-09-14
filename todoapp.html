@@ -9,23 +9,24 @@
 		<div id="todoapp">
 			<h1>To do App</h1>
 			<input type="text" v-model="newTask">
-			<div class="grid-container">
-				<div class="grid-item outside-left row1">Name</div>
-				<div class="grid-item outside-left row2">Name</div>
-				<div class="grid-item outside-left row3">Name</div>
-				<div class="grid-item outside-left row4">Name</div>
-				<div class="grid-item row1">Category</div>
-				<div class="grid-item outside-right row1">Proirity</div>
-				
-				<div class="grid-item row2">Category</div>
-				<div class="grid-item outside-right row2">Proirity</div>
-				
-				<div class="grid-item row3">Category</div>
-				<div class="grid-item outside-right row3">Proirity</div>
-				
-				<div class="grid-item row4">Category</div>
-				<div class="grid-item outside-right row4">Proirity</div>
+			<button @click="addTask">Add Task</button>
+			<div>
+				<div v-for="task in tasks" class="task-container">
+					<div class="task-column label">{{task.label}}</div>
+					<div class="task-column category">{{task.category}}</div>
+					<div class="task-column priority">{{task.priority}}</div>
+				</div>
 			</div>
+			<!--<div class="grid-container">
+				<div v-for="task in tasks" class="grid-item outside-left column1">{{task.label}}</div>
+				<div v-for="task in tasks" class="grid-item column2">
+					{{task.category}}
+				</div>
+				<div v-for="task in tasks" class="grid-item outside-right column3" v-bind:class="[task.strRow]">
+					{{task.priority}}
+				</div>
+				<div></div>
+			</div>-->
 		</div>
 		<script src="https://unpkg.com/vue"></script>
 		<script src="todoapp.js"></script>
