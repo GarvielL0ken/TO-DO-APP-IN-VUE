@@ -8,8 +8,8 @@
 	<body>
 		<div id="todoapp">
 			<h1>To do App</h1>
-			<button>View</button>
-			<button>Edit</button>
+			<button v-if="state==='edit'" @click="changeState('view')">View</button>
+			<button v-if="state==='view'" @click="changeState('edit')">Edit</button>
 			<br>
 			<input type="text" v-model="newTask">
 			<button @click="addTask" :disabled="newTask.length===0">Add Task</button>
@@ -20,7 +20,8 @@
 					<div class="task-header priority">Priority</div>
 				</div>
 				<div v-for="task in tasks" class="task-container">
-					<div class="task-column label">{{task.label}}</div>
+					<div class="task-column label" v-if="state==='view'">{{task.label}}</div>
+					<div class="task-column label" v-if="state==='edit'"><input type="text" v-model="task.label"></div>
 					<div class="task-column category">{{task.category}}</div>
 					<div class="task-column priority">
 						{{task.priority}}

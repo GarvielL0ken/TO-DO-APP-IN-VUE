@@ -2,6 +2,7 @@ new Vue({
 	el : "#todoapp",
 	data : {
 		newTask : "test",
+		state : "view",
 		tasks : [{label : "Complete Project",
 					category : "Career",
 					priority : 0,
@@ -19,6 +20,9 @@ new Vue({
 		addTask() {
 			this.tasks.push({label : this.newTask, category : "None", priority : 0, complete : false})
 			this.newTask = ""
+		},
+		changeState(newState) {
+			this.state = newState
 		},
 		deleteTask(task) {
 			console.log(task)
