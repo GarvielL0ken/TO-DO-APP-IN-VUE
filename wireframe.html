@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html>
-	<div id="toDoApp">
-		<button v-if="state==='view'" @click="changeState('edit')">Edit</button>
-		<button v-if="state==='edit'" @click="changeState('view')">View</button>
-		<br>
-		<input type="text">
-		<button>Add Item</button>
-		<br>
-		<Button>Sort Alphabetically</Button>
-		<Button>Sort By Proirity</Button>
-		<p v-if="state==='edit'">Diffrent headers for each cell in the grid</p>
-		<ul>
-			<li v-if="state==='view'">item 1</li>
-			<li v-if="state==='edit'"><input type="text" value="item 1"><input type="text" value="Household"><input type="number" min="1" max="5"><button>delete</button></li>
+	<head>
+		<title>To Do App</title>
+	</head>
+	<body>
+		<div id="toDoApp">
+			<h1>Header</h1>
+			<button v-if="state==='view'" @click="changeState('edit')">Edit</button>
+			<button v-if="state==='edit'" @click="changeState('view')">View</button>
+			<br>
+			<input type="text">
+			<button>Add Item</button>
+			<br>
+			<Button>Sort Alphabetically</Button>
+			<Button>Sort By Proirity</Button>
+			<p v-if="state==='edit'">Diffrent headers for each cell in the grid</p>
+			<ul>
+				<li v-if="state==='view'">item 1 Category Proirity</li>
+				<li v-if="state==='edit'"><input type="text" value="item 1"><input type="text" value="Household"><input type="number" min="1" max="5"><button>delete</button></li>
 
-			<li v-if="state==='view'">item 2 </li>
-			<li v-if="state==='edit'"><input type="text" value="item 2"><input type="text" value="Bussiness"><input type="number" min="1" max="5"><button>delete</button></li>
+				<li v-if="state==='view'" style="color: red;">item 2 Category High Proirity</li>
+				<li v-if="state==='edit'"><input type="text" value="item 2"><input type="text" value="Bussiness"><input type="number" min="1" max="5"><button>delete</button></li>
 
-			<li v-if="state==='view'">item 3</li>
-			<li v-if="state==='edit'"><input type="text" value="item 3"><input type="text" value="None"><input type="number" min="1" max="5"><button>delete</button></li>
-		</ul>
-		<form>
-			<label for="quantity">Quantity (between 1 and 5):</label>
-			<input type="number" id="quantity" name="quantity" min="1" max="5">
-		  </form>
-	</div>
+				<li v-if="state==='view'" style="color: blue;">item 3 Category Low Proirity</li>
+				<li v-if="state==='edit'"><input type="text" value="item 3"><input type="text" value="None"><input type="number" min="1" max="5"><button>delete</button></li>
+			</ul>
+		</div>
+	</body>
 	<script src="https://unpkg.com/vue"></script>
 	<script>
 		new Vue({
