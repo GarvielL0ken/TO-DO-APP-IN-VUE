@@ -1,0 +1,43 @@
+body {
+	background-color: rgb(20, 20, 20);
+	color: aliceblue;
+	text-align: center;
+}
+
+.grid-container {
+	background-color: grey;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	padding: 10px;
+}
+
+.grid-item {
+	background-color: darkgrey;
+	margin-top: 5px;
+	border-color: black;
+	border-right: 2px solid black;
+}
+
+.outside-left {
+	border-left: 0px;
+}
+
+.outside-right {
+	border-right: 0px;
+}
+
+.row1 {
+	grid-row: 1;
+}
+
+.row2 {
+	grid-row: 2;
+}
+
+.row3 {
+	grid-row: 3;
+}
+
+.row4 {
+	grid-row: 4;
+}
