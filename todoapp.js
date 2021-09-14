@@ -19,6 +19,12 @@ new Vue({
 		addTask() {
 			this.tasks.push({label : this.newTask, category : "None", priority : 0, complete : false})
 			this.newTask = ""
+		},
+		deleteTask(task) {
+			console.log(task)
+			this.tasks = this.tasks.filter(function(value, index, tasks){
+				return (value.label != task.label)
+			})
 		}
 	}
 })

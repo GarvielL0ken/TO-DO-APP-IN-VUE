@@ -1,6 +1,6 @@
 body {
 	background-color: rgb(20, 20, 20);
-	color: aliceblue;
+	color:aliceblue;
 	text-align: center;
 }
 
@@ -26,8 +26,22 @@ body {
 	border-right: 0px;
 }
 
+.header-container {
+	background-color: none;
+	height: 51px;
+}
+
+.task-header {
+	background-color: grey;
+	border: 1px solid black;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	width: 30%;
+}
+
 .task-container {
-	height: 25px;
+	height: 40px;
 	margin-top: 5px;
 }
 
@@ -35,7 +49,8 @@ body {
 	background-color: darkgrey;
 	border: 1px solid black;
 	float: left;
-	height: 23px;
+	height: 37px;
+	line-height: 37px;
 	width: 30%;
 }
 
