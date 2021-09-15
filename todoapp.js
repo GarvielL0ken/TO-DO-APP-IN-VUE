@@ -28,8 +28,15 @@ new Vue({
 	},
 	methods : {
 		addTask() {
-			this.tasks.push({label : this.newTaskLabel, category : "None", priority : 0, complete : false})
-			this.newTaskLabel = ""
+			this.tasks.push({label : this.newTaskLabel,
+				category : this.newTaskCategory,
+				dueDate : this.newTaskDueDate,
+				priority : this.newTaskPriority,
+				complete : false})
+			this.newTaskLabel = "";
+			this.newTaskCategory = "";
+			this.newTaskDueDate = "";
+			this.newTaskPriority = 0;
 		},
 		changeState(newState) {
 			this.state = newState
