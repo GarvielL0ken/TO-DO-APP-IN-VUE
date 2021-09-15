@@ -19,17 +19,18 @@
 			<input type="number" v-model="newTaskPriority">
 			<input type="date" v-model="newTaskDueDate">
 			<button @click="addTask" :disabled="newTaskLabel.length===0">Add Task</button>
+			<br>
 			<div>
 				<!-- Headers for each Column-->
 				<div class="header-container">
-					<div class="task-header label">Label</div>
-					<div class="task-header category">Category</div>
-					<div class="task-header due-date">Due Date</div>
-					<div class="task-header priority">Priority</div>
+					<div class="task-header label" @click="changeSortState('label')">Label</div>
+					<div class="task-header category" @click="changeSortState('category')">Category</div>
+					<div class="task-header due-date" @click="changeSortState('due date')">Due Date</div>
+					<div class="task-header priority" @click="changeSortState('priority')">Priority</div>
 				</div>
 
 				<!-- Each task has a pair of display modes: 'view' and 'edit' -->
-				<div v-for="task in tasks" class="task-container">
+				<div v-for="task in sortedList" class="task-container">
 					<!-- Label -->
 					<div class="task-column label" v-if="state==='view'">{{task.label}}</div>
 					<div class="task-column label" v-if="state==='edit'"><input type="text" v-model="task.label"></div>
