@@ -30,26 +30,26 @@
 				</div>
 
 				<!-- Each task has a pair of display modes: 'view' and 'edit' -->
-				<div v-for="task in sortedList" class="task-container">
+				<div v-for="task in sortedList" class="task-container" @click="toggleComplete(task)">
 					<!-- Label -->
-					<div class="task-column label" v-if="state==='view'">{{task.label}}</div>
+					<div class="task-column label" v-if="state==='view'" :class="{strikeout : task.complete}">{{task.label}}</div>
 					<div class="task-column label" v-if="state==='edit'"><input type="text" v-model="task.label"></div>
 
 					<!-- Category -->
-					<div class="task-column category" v-if="state==='view'">{{task.category}}</div>
+					<div class="task-column category" v-if="state==='view'" :class="{strikeout : task.complete}">{{task.category}}</div>
 					<div class="task-column category" v-if="state==='edit'">
 						<input type="text" v-model="task.category">
 					</div>
 
 
 					<!-- Due Date-->
-					<div class="task-column due-date" v-if="state==='view'">{{task.dueDate}}</div>
+					<div class="task-column due-date" v-if="state==='view'" :class="{strikeout : task.complete}">{{task.dueDate}}</div>
 					<div class="task-column category" v-if="state==='edit'">
 						<input type="date" v-model="task.dueDate">
 					</div>
 
 					<!-- Priority -->
-					<div class="task-column priority" v-if="state==='view'">{{task.priority}}</div>
+					<div class="task-column priority" v-if="state==='view'" :class="{strikeout : task.complete}">{{task.priority}}</div>
 					<div class="task-column priority" v-if="state==='edit'">
 						<input type="number" v-model="task.priority">
 						<button @click="deleteTask(task)" v-if="state==='edit'">Delete</button>

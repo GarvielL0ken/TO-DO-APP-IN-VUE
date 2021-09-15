@@ -140,6 +140,12 @@ new Vue({
 				i++;
 			}
 			return (newList)
+		},
+		toggleComplete(task) {
+			task.complete = !task.complete;
+		},
+		log() {
+			console.log("success");
 		}
 	},
 	computed : {
