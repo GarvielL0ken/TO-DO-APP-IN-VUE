@@ -142,7 +142,8 @@ new Vue({
 			return (newList)
 		},
 		toggleComplete(task) {
-			task.complete = !task.complete;
+			if (this.state === "view")
+				task.complete = !task.complete;
 		},
 		log() {
 			console.log("success");
