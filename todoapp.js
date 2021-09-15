@@ -57,17 +57,82 @@ new Vue({
 				console.log(this.sortByPriorityState)
 			}
 		},
-		sortBy(list, field, activeFields) {
+		compareTasks(taskToInsert, taskCurrent, field, sortState) {
+			var str1;
+			var str2;
+
+			if (field === "label") {
+				str1 = taskToInsert.label;
+				str2 = taskCurrent.label;
+			}
+			if (field === "category") {
+				str1 = taskToInsert.category;
+				str2 = taskCurrent.category;
+			}
+			if (field === "date") {
+				str1 = taskToInsert.dueDate;
+				str2 = taskCurrent.dueDate;
+			}
+			if (field === "priority") {
+				str1 = taskToInsert.priority.toString();
+				str2 = taskCurrent.priority.toString();
+			}
+
+			console.log("str1: " + str1 + " str2: " + str2)
+			if (sortState === 1) {
+				console.log("True if str2 < str1");
+				console.log(str2.localeCompare(str1))
+				if (0 < str2.localeCompare(str1))
+					return (true)
+			}
+			if (sortState === 2) {
+				console.log("True if str1 > str2");
+				console.log(str1.localeCompare(str2))
+				if (0 < str1.localeCompare(str2))
+					return (true)
+			}
+			return (false);
+		},
+		sortBy(list, field, sortState) {
 			//Insertion Sort
-			newList = list[0];
+			var newList = [];
+			newList.push(list[0]);
 
 			i = 1;
 			while (list[i]){
 				j = 0;
-				console.log(list[i].label);
+				//Element that needs to be inserted into the new list
+				taskToInsert = list[i];
+				console.log("Item to be Inserted: " + taskToInsert.label);
+				while (newList[j]) {
+					//Compare against each element in the new list
+					taskCurrent = newList[j];
+					console.log("Item to be Compared: " + taskCurrent.label)
+					//If the current task's relevant field is less than (or more than) the taskToInserted's relavenat
+					// field, insert the task to the new list
+					if (this.compareTasks(taskToInsert, taskCurrent, field, sortState)) {
+						console.log("INSERT TASK");
+						newList.splice(j, 0, taskToInsert);
+						break ;
+					}
+
+					//If the task is the last task then append the task to the new list
+					if (!newList[j + 1]) {
+						console.log("END OF LIST : INSERT TASK");
+						newList.push(taskToInsert);
+						break ;
+					}
+					j++;
+				}
 				i++;
 			}
-			return (list)
+			console.log("newList:")
+			i = 0;
+			while (newList[i]) {
+				console.log(newList[i].label);
+				i++;
+			}
+			return (newList)
 		}
 	},
 	computed : {
@@ -78,7 +143,6 @@ new Vue({
 			date = this.sortByDueDateState;
 			prty = this.sortByPriorityState;
 			activeFields = (lbl << 6) + (ctg << 4) + (date << 2) + prty;
-			console.log((activeFields >>> 0).toString(2))
 
 			//If the user has not selected a field to sort by display the reversed list
 			if (!activeFields)
@@ -95,14 +159,14 @@ new Vue({
 			*/
 			list = this.tasks.slice(0).reverse();
 			if (lbl)
-				list = this.sortBy(list, "label", activeFields)
+				list = this.sortBy(list, "label", lbl)
 			if (prty)
-				list = this.sortBy(list, "priority", activeFields)
+				list = this.sortBy(list, "priority", prty)
 			if (date)
-				list = this.sortBy(list, "date", activeFields)
+				list = this.sortBy(list, "date", date)
 			if (ctg)
-				list = this.sortBy(list, "category", activeFields)
-			return(this.tasks)
+				list = this.sortBy(list, "category", ctg)
+			return(list)
 		}
 	}
 })  
