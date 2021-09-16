@@ -225,7 +225,7 @@ new Vue({
 		if (localStorage.sortByPriorityState)
 			this.sortByPriorityState = localStorage.sortByPriorityState;
 
-		if (localStorage.tasks && 0) {
+		if (localStorage.tasks) {
 			try {
 				console.log(this.tasks);
 				this.tasks = JSON.parse(localStorage.getItem('tasks'));
