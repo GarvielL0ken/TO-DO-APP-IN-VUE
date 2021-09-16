@@ -10,6 +10,11 @@ new Vue({
 		sortByCategoryState : 0,
 		sortByDueDateState : 0,
 		sortByPriorityState : 0,
+		sortIndicators : ["sortNone.png", "sortAsc.png", "SortDesc.png"],
+		sortIndicatorLabel : "sortNone.png",
+		sortIndicatorCategory : "sortNone.png",
+		sortIndicatorDueDate : "sortNone.png",
+		sortIndicatorPriority : "sortNone.png",
 		tasks : [{label : "Complete Project",
 					category : "Career",
 					dueDate : "1999-11-15",
@@ -68,20 +73,28 @@ new Vue({
 			this.saveTasks();
 		},
 		changeSortState(selectedState) {
-			if (selectedState === "label") 
+			if (selectedState === "label") {
 				this.sortByLabelState = (this.sortByLabelState + 1) % 3;
+				this.sortIndicatorLabel = this.sortIndicators[this.sortByLabelState];
+			}
 
-			if (selectedState === "category") 
+			if (selectedState === "category") {
 				this.sortByCategoryState = (this.sortByCategoryState + 1) % 3;
+				this.sortIndicatorCategory = this.sortIndicators[this.sortByCategoryState];
+			}
 
-			if (selectedState === "due date") 
-				this.sortByDueDateState = (this.sortByDueDateState + 1) % 3
+			if (selectedState === "due date") {
+				this.sortByDueDateState = (this.sortByDueDateState + 1) % 3;
+				this.sortIndicatorDueDate = this.sortIndicators[this.sortByDueDateState];
+		}
 
 			//+2 because higher priority items are usually more relevant
 			//So the sort state goes: 0, 2, 1
 			//						None, desc, asc
-			if (selectedState === "priority") 
-				this.sortByPriorityState = (this.sortByPriorityState + 2) % 3
+			if (selectedState === "priority") {
+				this.sortByPriorityState = (this.sortByPriorityState + 2) % 3;
+				this.sortIndicatorPriority = this.sortIndicators[this.sortByPriorityState];
+		}
 			
 		},
 		compareTasks(taskToInsert, taskCurrent, field, sortState) {

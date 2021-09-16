@@ -23,10 +23,22 @@
 			<div>
 				<!-- Headers for each Column-->
 				<div class="header-container">
-					<div class="task-header label" @click="changeSortState('label')">Label</div>
-					<div class="task-header category" @click="changeSortState('category')">Category</div>
-					<div class="task-header due-date" @click="changeSortState('due date')">Due Date</div>
-					<div class="task-header priority" @click="changeSortState('priority')">Priority</div>
+					<div class="task-header label" @click="changeSortState('label')">
+						Label
+						<img v-bind:src="'./media/' + sortIndicatorLabel" class="sort-indicator">
+					</div>
+					<div class="task-header category" @click="changeSortState('category')">
+						Category
+						<img v-bind:src="'./media/' + sortIndicatorCategory" class="sort-indicator">
+					</div>
+					<div class="task-header due-date" @click="changeSortState('due date')">
+						Due Date
+						<img v-bind:src="'./media/' + sortIndicatorDueDate" class="sort-indicator">
+					</div>
+					<div class="task-header priority" @click="changeSortState('priority')">
+						Priority
+						<img v-bind:src="'./media/' + sortIndicatorPriority" class="sort-indicator">
+					</div>
 				</div>
 
 				<!-- Each task has a pair of display modes: 'view' and 'edit' -->
