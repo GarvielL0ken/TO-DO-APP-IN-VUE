@@ -14,16 +14,19 @@ new Vue({
 					category : "Career",
 					dueDate : "1999-11-15",
 					priority : 0,
+					class : "",
 					complete : false},
 				{label : "Walk the Dog",
 					category : "Household",
 					dueDate : "1999-11-15",
 					priority : 1,
+					class: "priority1",
 					complete : false},
 				{label : "Wash the dishes",
 					category : "Household",
 					dueDate : "1999-11-15",
 					priority : 2,
+					class : "priority2",
 					complete : false}]
 	},
 	methods : {
@@ -32,6 +35,7 @@ new Vue({
 				category : this.newTaskCategory,
 				dueDate : this.newTaskDueDate,
 				priority : this.newTaskPriority,
+				class : this.calcClass(this.newTaskPriority, false),
 				complete : false})
 			this.newTaskLabel = "";
 			this.newTaskCategory = "";
@@ -40,8 +44,21 @@ new Vue({
 
 			this.saveTasks();
 		},
+		calcClass(priority, complete) {
+			var stringClass;
+
+			if (complete)
+				return ("strikethrough");
+			
+			if (priority) {
+				stringClass = "priority" + priority.toString();
+				return (stringClass);
+			}
+			
+			return ("");
+		},
 		changeState(newState) {
-			this.state = newState
+			this.state = newState;
 		},
 		deleteTask(task) {
 			this.tasks = this.tasks.filter(function(value, index, tasks){
@@ -148,6 +165,8 @@ new Vue({
 		toggleComplete(task) {
 			if (this.state === "view")
 				task.complete = !task.complete;
+
+			task.class = this.calcClass(task.priority, task.complete);
 		},
 		saveTasks() {
 			const strTasks = JSON.stringify(this.tasks);
@@ -206,7 +225,7 @@ new Vue({
 		if (localStorage.sortByPriorityState)
 			this.sortByPriorityState = localStorage.sortByPriorityState;
 
-		if (localStorage.tasks) {
+		if (localStorage.tasks && 0) {
 			try {
 				console.log(this.tasks);
 				this.tasks = JSON.parse(localStorage.getItem('tasks'));

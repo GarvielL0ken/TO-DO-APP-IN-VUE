@@ -31,6 +31,10 @@ body {
 	height: 51px;
 }
 
+.input-priority {
+	width: 40%;
+}
+
 .task-header {
 	background-color: grey;
 	border: 1px solid black;
@@ -60,7 +64,27 @@ body {
 	width: 35%;
 }
 
-.strikeout{
+.strikethrough{
 	text-decoration: line-through;
 	color: grey;
+}
+
+.priority1 {
+	background-color: greenyellow;
+	color: black;
+}
+
+.priority2 {
+	background-color: yellow;
+	color: black;
+}
+
+.priority3 {
+	background-color: orange;
+	color: black;
+}
+
+.priority4 {
+	background-color: red;
+	color: black;
 }
