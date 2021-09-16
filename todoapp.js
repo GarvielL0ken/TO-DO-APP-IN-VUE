@@ -68,22 +68,21 @@ new Vue({
 			this.saveTasks();
 		},
 		changeSortState(selectedState) {
-			if (selectedState === "label") {
-				this.sortByLabelState = (this.sortByLabelState + 1) % 3
-				console.log(this.sortByLabelState)
-			}
-			if (selectedState === "category") {
-				this.sortByCategoryState = (this.sortByCategoryState + 1) % 3
-				console.log(this.sortByCategoryState)
-			}
-			if (selectedState === "due date") {
+			if (selectedState === "label") 
+				this.sortByLabelState = (this.sortByLabelState + 1) % 3;
+
+			if (selectedState === "category") 
+				this.sortByCategoryState = (this.sortByCategoryState + 1) % 3;
+
+			if (selectedState === "due date") 
 				this.sortByDueDateState = (this.sortByDueDateState + 1) % 3
-				console.log(this.sortByDueDateState)
-			}
-			if (selectedState === "priority") {
-				this.sortByPriorityState = (this.sortByPriorityState + 1) % 3
-				console.log(this.sortByPriorityState)
-			}
+
+			//+2 because higher priority items are usually more relevant
+			//So the sort state goes: 0, 2, 1
+			//						None, desc, asc
+			if (selectedState === "priority") 
+				this.sortByPriorityState = (this.sortByPriorityState + 2) % 3
+			
 		},
 		compareTasks(taskToInsert, taskCurrent, field, sortState) {
 			var str1;
@@ -106,16 +105,11 @@ new Vue({
 				str2 = taskCurrent.priority.toString();
 			}
 
-			console.log("str1: " + str1 + " str2: " + str2)
 			if (sortState === 1) {
-				console.log("True if str2 < str1");
-				console.log(str2.localeCompare(str1))
 				if (0 < str2.localeCompare(str1))
 					return (true)
 			}
 			if (sortState === 2) {
-				console.log("True if str1 > str2");
-				console.log(str1.localeCompare(str2))
 				if (0 < str1.localeCompare(str2))
 					return (true)
 			}
@@ -131,33 +125,23 @@ new Vue({
 				j = 0;
 				//Element that needs to be inserted into the new list
 				taskToInsert = list[i];
-				console.log("Item to be Inserted: " + taskToInsert.label);
 				while (newList[j]) {
 					//Compare against each element in the new list
 					taskCurrent = newList[j];
-					console.log("Item to be Compared: " + taskCurrent.label)
 					//If the current task's relevant field is less than (or more than) the taskToInserted's relavenat
 					// field, insert the task to the new list
 					if (this.compareTasks(taskToInsert, taskCurrent, field, sortState)) {
-						console.log("INSERT TASK");
 						newList.splice(j, 0, taskToInsert);
 						break ;
 					}
 
 					//If the task is the last task then append the task to the new list
 					if (!newList[j + 1]) {
-						console.log("END OF LIST : INSERT TASK");
 						newList.push(taskToInsert);
 						break ;
 					}
 					j++;
 				}
-				i++;
-			}
-			console.log("newList:")
-			i = 0;
-			while (newList[i]) {
-				console.log(newList[i].label);
 				i++;
 			}
 			return (newList)
@@ -171,11 +155,7 @@ new Vue({
 		saveTasks() {
 			const strTasks = JSON.stringify(this.tasks);
 
-			console.log(strTasks);
 			localStorage.setItem('tasks', strTasks);
-		},
-		log() {
-			console.log("success");
 		}
 	},
 	computed : {
@@ -227,9 +207,7 @@ new Vue({
 
 		if (localStorage.tasks) {
 			try {
-				console.log(this.tasks);
 				this.tasks = JSON.parse(localStorage.getItem('tasks'));
-				console.log(this.tasks);
 			} catch(e) {
 				localStorage.removeItem('tasks');
 			}
