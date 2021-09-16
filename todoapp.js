@@ -1,7 +1,7 @@
 new Vue({
 	el : "#todoapp",
 	data : {
-		newTaskLabel : "test",
+		newTaskLabel : "",
 		newTaskCategory : "",
 		newTaskDueDate : "",
 		newTaskPriority : 0,
@@ -37,6 +37,8 @@ new Vue({
 			this.newTaskCategory = "";
 			this.newTaskDueDate = "";
 			this.newTaskPriority = 0;
+
+			this.saveTasks();
 		},
 		changeState(newState) {
 			this.state = newState
@@ -45,6 +47,8 @@ new Vue({
 			this.tasks = this.tasks.filter(function(value, index, tasks){
 				return (value.label != task.label);
 			})
+
+			this.saveTasks();
 		},
 		changeSortState(selectedState) {
 			if (selectedState === "label") {
@@ -145,6 +149,12 @@ new Vue({
 			if (this.state === "view")
 				task.complete = !task.complete;
 		},
+		saveTasks() {
+			const strTasks = JSON.stringify(this.tasks);
+
+			console.log(strTasks);
+			localStorage.setItem('tasks', strTasks);
+		},
 		log() {
 			console.log("success");
 		}
@@ -181,6 +191,34 @@ new Vue({
 			if (ctg)
 				list = this.sortBy(list, "category", ctg)
 			return(list)
+		}
+	},
+	mounted() {
+		if (localStorage.sortByLabelState)
+			this.sortByLabelState = localStorage.sortByLabelState;
+
+		if (localStorage.sortByCategoryState)
+			this.sortByCategoryState = localStorage.sortByCategoryState;
+
+		if (localStorage.sortByDueDateState)
+			this.sortByDueDateState = localStorage.sortByDueDateState;
+
+		if (localStorage.sortByPriorityState)
+			this.sortByPriorityState = localStorage.sortByPriorityState;
+
+		if (localStorage.tasks) {
+			try {
+				console.log(this.tasks);
+				this.tasks = JSON.parse(localStorage.getItem('tasks'));
+				console.log(this.tasks);
+			} catch(e) {
+				localStorage.removeItem('tasks');
+			}
+		}
+	},
+	watch : {
+		newTaskCategory(newCategory) {
+			localStorage.category = newCategory;
 		}
 	}
 })  
