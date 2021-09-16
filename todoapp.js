@@ -76,17 +76,20 @@ new Vue({
 			if (selectedState === "label") {
 				this.sortByLabelState = (this.sortByLabelState + 1) % 3;
 				this.sortIndicatorLabel = this.sortIndicators[this.sortByLabelState];
+				localStorage.sortByLabelState = this.sortByLabelState;
 			}
 
 			if (selectedState === "category") {
 				this.sortByCategoryState = (this.sortByCategoryState + 1) % 3;
 				this.sortIndicatorCategory = this.sortIndicators[this.sortByCategoryState];
+				localStorage.sortByCategoryState = this.sortByCategoryState;
 			}
 
 			if (selectedState === "due date") {
 				this.sortByDueDateState = (this.sortByDueDateState + 1) % 3;
 				this.sortIndicatorDueDate = this.sortIndicators[this.sortByDueDateState];
-		}
+				localStorage.sortByDueDateState = this.sortByDueDateState;
+			}
 
 			//+2 because higher priority items are usually more relevant
 			//So the sort state goes: 0, 2, 1
@@ -94,8 +97,8 @@ new Vue({
 			if (selectedState === "priority") {
 				this.sortByPriorityState = (this.sortByPriorityState + 2) % 3;
 				this.sortIndicatorPriority = this.sortIndicators[this.sortByPriorityState];
-		}
-			
+				localStorage.sortByPriorityState = this.sortByPriorityState;
+			}
 		},
 		compareTasks(taskToInsert, taskCurrent, field, sortState) {
 			var str1;
@@ -194,29 +197,38 @@ new Vue({
 					***		ZZZZZZZZZ
 			*/
 			list = this.tasks.slice(0).reverse();
-			if (lbl)
-				list = this.sortBy(list, "label", lbl)
-			if (prty)
-				list = this.sortBy(list, "priority", prty)
-			if (date)
-				list = this.sortBy(list, "date", date)
-			if (ctg)
-				list = this.sortBy(list, "category", ctg)
+			if (lbl > 0)
+				list = this.sortBy(list, "label", lbl);
+			if (prty > 0)
+				list = this.sortBy(list, "priority", prty);
+			if (date > 0)
+				list = this.sortBy(list, "date", date);
+			if (ctg > 0)
+				list = this.sortBy(list, "category", ctg);
 			return(list)
 		}
 	},
 	mounted() {
-		if (localStorage.sortByLabelState)
-			this.sortByLabelState = localStorage.sortByLabelState;
+		if (localStorage.sortByLabelState) {
+			this.sortByLabelState = parseInt(localStorage.sortByLabelState);
+			this.sortIndicatorLabel = this.sortIndicators[this.sortByLabelState];
+		}
 
-		if (localStorage.sortByCategoryState)
-			this.sortByCategoryState = localStorage.sortByCategoryState;
+		if (localStorage.sortByCategoryState) {
+			this.sortByCategoryState = parseInt(localStorage.sortByCategoryState);
+			this.sortIndicatorCategory = this.sortIndicators[this.sortByCategoryState];
+		}
 
-		if (localStorage.sortByDueDateState)
-			this.sortByDueDateState = localStorage.sortByDueDateState;
+		if (localStorage.sortByDueDateState) {
+			this.sortByDueDateState = parseInt(localStorage.sortByDueDateState);
+			this.sortIndicatorDueDate = this.sortIndicators[this.sortByDueDateState];
+		}
 
-		if (localStorage.sortByPriorityState)
-			this.sortByPriorityState = localStorage.sortByPriorityState;
+		if (localStorage.sortByPriorityState) {
+			this.sortByPriorityState = parseInt(localStorage.sortByPriorityState);
+			this.sortIndicatorPriority = this.sortIndicators[this.sortByPriorityState];
+		}
+
 
 		if (localStorage.tasks) {
 			try {
@@ -225,10 +237,5 @@ new Vue({
 				localStorage.removeItem('tasks');
 			}
 		}
-	},
-	watch : {
-		newTaskCategory(newCategory) {
-			localStorage.category = newCategory;
-		}
 	}
-})  
+})
