@@ -10,15 +10,21 @@
 			<h1>To do App</h1>
 			<!-- Controls for the application -->
 			<!-- Switch between the two different display modes -->
-			<button v-if="state==='edit'" @click="changeState('view')">View</button>
-			<button v-if="state==='view'" @click="changeState('edit')">Edit</button>
+			<div class="view-mode-container">
+				<button v-if="state==='edit'" @click="changeState('view')" class="view-mode-selector">Change Display Mode: View</button>
+				<button v-if="state==='view'" @click="changeState('edit')" class="view-mode-selector">Change Display Mode: Edit</button>
+			</div>
 			<br>
 			<!-- User inputs for add new Tasks -->
-			<input type="text" v-model="newTaskLabel">
-			<input type="text" v-model="newTaskCategory">
-			<input type="number" v-model="newTaskPriority">
-			<input type="date" v-model="newTaskDueDate">
-			<button @click="addTask" :disabled="newTaskLabel.length===0">Add Task</button>
+			<div class="new-task-container">
+				<h3>Add New Task:</h3>
+				<label>Label:</label><input type="text" v-model="newTaskLabel">
+				<label>Category:</label><input type="text" v-model="newTaskCategory">
+				<label>Due Date:</label><input type="date" v-model="newTaskDueDate">
+				<label>Priority:</label><input type="number" v-model="newTaskPriority">
+				
+				<button @click="addTask" :disabled="newTaskLabel.length===0">Add Task</button>
+			</div>
 			<br>
 			<div>
 				<!-- Headers for each Column-->

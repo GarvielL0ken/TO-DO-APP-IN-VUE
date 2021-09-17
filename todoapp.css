@@ -4,26 +4,9 @@ body {
 	text-align: center;
 }
 
-.grid-container {
-	background-color: grey;
-	display: grid;
-	grid-template-columns: auto auto auto;
-	padding: 10px;
-}
-
-.grid-item {
-	background-color: darkgrey;
-	margin-top: 5px;
-	border-color: black;
-	border-right: 2px solid black;
-}
-
-.outside-left {
-	border-left: 0px;
-}
-
-.outside-right {
-	border-right: 0px;
+button {
+	border: 2px solid black;
+	border-radius: 15px;
 }
 
 .header-container {
@@ -38,6 +21,7 @@ body {
 .task-header {
 	background-color: grey;
 	border: 1px solid black;
+	border-radius: 5px;
 	float: left;
 	height: 50px;
 	line-height: 50px;
@@ -52,10 +36,36 @@ body {
 .task-column {
 	background-color: darkgrey;
 	border: 1px solid black;
+	border-radius: 5px;
 	float: left;
 	height: 37px;
 	line-height: 37px;
 	width: 20%;
+}
+
+.view-mode-container {
+	background-color: gray;
+	border-radius: 15px;
+	height: 80px;
+	width: 95.6%;
+	margin-left: 2%;
+}
+
+.view-mode-selector {
+	background-color: rgb(218, 218, 218);
+	border: 2px solid black;
+	border-radius: 15px;
+	margin-top: 20px;
+	height: 40px;
+	width: 200px;
+}
+
+.new-task-container {
+	background-color: gray;
+	border-radius: 15px;
+	height: 80px;
+	width: 95.6%;
+	margin-left: 2%;
 }
 
 .label {
