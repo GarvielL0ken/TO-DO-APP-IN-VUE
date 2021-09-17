@@ -10,7 +10,7 @@ new Vue({
 		sortByCategoryState : 0,
 		sortByDueDateState : 0,
 		sortByPriorityState : 0,
-		sortIndicators : ["sortNone.png", "sortAsc.png", "SortDesc.png"],
+		sortIndicators : ["sortNone.png", "sortAsc.png", "sortDesc.png"],
 		sortIndicatorLabel : "sortNone.png",
 		sortIndicatorCategory : "sortNone.png",
 		sortIndicatorDueDate : "sortNone.png",
